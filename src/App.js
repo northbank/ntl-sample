@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, SegmentedControlIOS} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -8,13 +8,13 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default function App({ onPress }) {
+export default function App({ onChange }) {
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>Welcome to React Native!</Text>
       <Text style={styles.instructions}>To get started, edit App.js</Text>
       <Text style={styles.instructions}>{instructions}</Text>
-      <Button onPress={onPress} title="Fire your event" />
+      <SegmentedControlIOS testID='control' onChange={onChange} />
     </View>
   );
 }

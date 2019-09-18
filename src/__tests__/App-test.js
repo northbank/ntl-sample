@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from 'native-testing-library';
+import { fireEvent, render, NativeTestEvent } from 'native-testing-library';
 
 import App from '../App';
 
@@ -13,8 +13,9 @@ test('it renders a welcome message', () => {
 
 test('it can handle events', () => {
   const spy = jest.fn();
-  const { getByText } = render(<App onPress={spy} />);
+  const { getByTestId } = render(<App onChange={spy} />);
 
-  fireEvent.press(getByText(/fire your event/i));
-  expect(spy).toHaveBeenCalledTimes(1);
+  fireEvent(getByTestId('control'), new NativeTestEvent('change', { nativeEvent: { value: 'fails' }}));
+  fireEvent.change(getByTestId('control'), { nativeEvent: { value: 'still fails' }});
+  expect(spy).toHaveBeenCalledTimes(2);
 })
